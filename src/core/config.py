@@ -1,5 +1,5 @@
 import secrets
-from typing import Any, Union
+from typing import Any
 
 from pydantic import BaseSettings, EmailStr, AnyHttpUrl, PostgresDsn, validator
 
@@ -39,6 +39,8 @@ class Settings(BaseSettings):
 
     FIRST_SUPERUSER: EmailStr
     FIRST_SUPERUSER_PASSWORD: str
+
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 8
 
     class Config:
         case_sensitive = True
