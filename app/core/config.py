@@ -25,6 +25,12 @@ class Settings(BaseSettings):
     POSTGRES_DB: str
     SQLALCHEMY_DATABASE_URI: PostgresDsn | None = None
 
+    TEST_DB_DRIVER: str
+    TEST_DB_HOST: str
+    TEST_DB_USER: str
+    TEST_DB_PASSWORD: str
+    TEST_DB_DATABASE: str
+
     @validator("SQLALCHEMY_DATABASE_URI", pre=True)
     def assemble_db_connection(cls, v: str | None, values: dict[str, Any]) -> Any:
         if isinstance(v, str):

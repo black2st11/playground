@@ -2,10 +2,10 @@ from typing import Any
 
 from sqlalchemy.orm import Session
 
-from src.crud.base import CRUDBase
-from src.models.user import User
-from src.schemas.user import UserCreate, UserUpdate
-from src.core.security import verify_password, get_password_hash
+from app.crud.base import CRUDBase
+from app.models.user import User
+from app.schemas.user import UserCreate, UserUpdate
+from app.core.security import verify_password, get_password_hash
 
 
 class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):

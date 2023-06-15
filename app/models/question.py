@@ -2,7 +2,7 @@ from sqlalchemy import Column, ForeignKey, Integer, String, DateTime, CheckConst
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
-from src.db.base_class import Base
+from app.db.base_class import Base
 
 
 class Question(Base):

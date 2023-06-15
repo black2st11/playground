@@ -1,9 +1,9 @@
 from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
 
-from src.crud.base import CRUDBase
-from src.models.answer import Answer
-from src.schemas.answer import AnswerCreate, AnswerUpdate
+from app.crud.base import CRUDBase
+from app.models.answer import Answer
+from app.schemas.answer import AnswerCreate, AnswerUpdate
 
 
 class CRUDAnswer(CRUDBase[Answer, AnswerCreate, AnswerUpdate]):
