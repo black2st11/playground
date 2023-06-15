@@ -1,4 +1,4 @@
-from typing import Optional
+from datetime import datetime
 
 from pydantic import BaseModel, EmailStr
 
@@ -20,6 +20,7 @@ class UserUpdate(UserBase):
 
 class UserInDBBase(UserBase):
     id: int | None = None
+    created: datetime
 
     class Config:
         orm_mode = True

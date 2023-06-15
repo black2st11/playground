@@ -1,13 +1,11 @@
-from typing import Optional
 from datetime import datetime
-from uuid import UUID
 from pydantic import BaseModel, validator
 
 
 # Shared properties question model
 class QuestionBase(BaseModel):
     title: str
-    description: Optional[str] = None
+    description: str | None = None
     count: int
 
     @validator("count")
