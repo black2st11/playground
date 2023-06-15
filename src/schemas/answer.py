@@ -1,6 +1,4 @@
 from datetime import datetime
-from typing import Optional
-from uuid import UUID
 from pydantic import BaseModel
 
 
@@ -23,9 +21,9 @@ class AnswerUpdate(AnswerBase):
 # Properties shared by models stored in DB
 class AnswerInDBBase(AnswerBase):
     id: int
-    created: datetime
     question_id: int
     owner_id: int | None
+    created: datetime
 
     class Config:
         orm_mode = True
