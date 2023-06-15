@@ -1,5 +1,6 @@
-from sqlalchemy import Boolean, Column, Integer, String
+from sqlalchemy import Boolean, Column, Integer, String, DateTime
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql import func
 
 from src.db.base_class import Base
 
@@ -11,4 +12,5 @@ class User(Base):
     hashed_password = Column(String, nullable=False)
     is_active = Column(Boolean(), default=True)
     is_superuser = Column(Boolean(), default=False)
+    created = Column(DateTime(), server_default=func.now())
     questions = relationship("Question", back_populates="owner")
