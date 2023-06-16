@@ -14,3 +14,4 @@ class User(Base):
     is_superuser = Column(Boolean(), default=False)
     created = Column(DateTime(), server_default=func.now())
     questions = relationship("Question", back_populates="owner")
+    answers = relationship("Answer", back_populates="owner")

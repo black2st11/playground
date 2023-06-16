@@ -6,16 +6,7 @@ from sqlalchemy.engine import URL
 from app.core.config import settings
 
 Base = declarative_base()
-
-url = URL.create(
-    drivername=settings.TEST_DB_DRIVER,
-    username=settings.TEST_DB_USER,
-    host=settings.TEST_DB_HOST,
-    password=settings.TEST_DB_PASSWORD,
-    database=settings.TEST_DB_DATABASE,
-)
-
-engine = create_engine("sqlite:///db\\test.db", echo=True)
+engine = create_engine(settings.SQLALCHEMY_TEST_DATABASE_URL, echo=True)
 Session = sessionmaker(bind=engine)
 
 

@@ -7,9 +7,9 @@ from pydantic import BaseSettings, EmailStr, AnyHttpUrl, PostgresDsn, validator
 class Settings(BaseSettings):
     API_STR: str = "/api"
     SECRET_KEY: str = secrets.token_urlsafe(32)
-    BACKENDS_CORS_ORIGINS: list[AnyHttpUrl] = []
+    BACKENDS_CORS_ORIGINS: list[AnyHttpUrl | str] = []
 
-    @validator("BACKEND_CORS_ORIGINS", pre=True)
+    @validator("BACKENDS_CORS_ORIGINS", pre=True)
     def assemble_cors_origins(cls, v: str | list[str]) -> str | list[str]:
         if isinstance(v, str) and not v.startswith("["):
             return [i.strip() for i in v.split(",")]
@@ -19,29 +19,8 @@ class Settings(BaseSettings):
 
     PROJECT_NAME: str
 
-    POSTGRES_SERVER: str
-    POSTGRES_USER: str
-    POSTGRES_PASSWORD: str
-    POSTGRES_DB: str
-    SQLALCHEMY_DATABASE_URI: PostgresDsn | None = None
-
-    TEST_DB_DRIVER: str
-    TEST_DB_HOST: str
-    TEST_DB_USER: str
-    TEST_DB_PASSWORD: str
-    TEST_DB_DATABASE: str
-
-    @validator("SQLALCHEMY_DATABASE_URI", pre=True)
-    def assemble_db_connection(cls, v: str | None, values: dict[str, Any]) -> Any:
-        if isinstance(v, str):
-            return v
-        return PostgresDsn.build(
-            scheme="postrgresql",
-            user=values.get("POSTGRES_USER"),
-            password=values.get("POSTGRES_PASSWORD"),
-            host=values.get("POSTGRES_SERVER"),
-            path=f"/{values.get('POSTGRES_DB') or ''}",
-        )
+    SQLALCHEMY_DATABASE_URL: PostgresDsn | None = None
+    SQLALCHEMY_TEST_DATABASE_URL: PostgresDsn | None = None
 
     FIRST_SUPERUSER: EmailStr
     FIRST_SUPERUSER_PASSWORD: str
@@ -49,7 +28,10 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 8
 
     class Config:
+        env_file = ".env"
         case_sensitive = True
 
 
 settings = Settings()
+
+print(settings.dict())
