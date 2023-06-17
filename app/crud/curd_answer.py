@@ -28,23 +28,23 @@ class CRUDAnswer(CRUDBase[Answer, AnswerCreate, AnswerUpdate]):
         return db_obj
 
     def get_multi_by_question(
-        self, db: Session, *, question_id, skip: int = 0, limit: int = 100
+        self, db: Session, *, question_id, offset: int = 0, limit: int = 100
     ) -> list[Answer]:
         return (
             db.query(self.model)
             .filter(Answer.question_id == question_id)
-            .offset(skip)
+            .offset(offset)
             .limit(limit)
             .all()
         )
 
     def get_multi_by_owner(
-        self, db: Session, *, owner_id, skip: int = 10, limit: int = 100
+        self, db: Session, *, owner_id, offset: int = 0, limit: int = 100
     ) -> list[Answer]:
         return (
             db.query(self.model)
             .filter(Answer.owner_id == owner_id)
-            .offset(skip)
+            .offset(offset)
             .limit(limit)
             .all()
         )
