@@ -18,12 +18,12 @@ class CRUDQuestion(CRUDBase[Question, QuestionCreate, QuestionUpdate]):
         return db_obj
 
     def get_multi_by_owner(
-        self, db: Session, *, owner_id: int, skip: int = 0, limit: int = 10
+        self, db: Session, *, owner_id: int, offset: int = 0, limit: int = 10
     ) -> list[Question]:
         return (
             db.query(self.model)
             .filter(Question.owner_id == owner_id)
-            .offset(skip)
+            .offset(offset)
             .limit(limit)
             .all()
         )

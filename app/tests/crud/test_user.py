@@ -89,4 +89,4 @@ class TestUser:
     def test_get_multiple_user(self, db_session):
         create_multiple_user(db_session, 11)
         assert 10 == len(crud.user.get_multi(db=db_session, offset=0, limit=10))
-        assert 5 == len(crud.user.get_multi(db=db_session, offset=0, limit=100))
+        assert 5 == len(crud.user.get_multi(db=db_session, offset=6))

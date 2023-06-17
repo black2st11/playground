@@ -12,7 +12,7 @@ def db():
     return {"connection": engine.connect(), "engine": engine}
 
 
-@fixture(scope="session")
+@fixture(scope="function")
 def setup_database(db):
     Base.metadata.create_all(db["connection"])
     yield
