@@ -15,4 +15,6 @@ from .question import (
     QuestionUpdate,
 )
 
+from .user import User, UserBase, UserCreate, UserInDB, UserInDBBase, UserUpdate
+
 from .token import TokenPayload
